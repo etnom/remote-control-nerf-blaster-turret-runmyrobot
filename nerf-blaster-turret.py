@@ -1,28 +1,10 @@
 # Made for RunMyRobot
 # By Monty C
 
-# import stuff for motor HAT
 from Adafruit_MotorHAT import Adafruit_MotorHAT, Adafruit_StepperMotor
-
 import time
 import atexit
-
 import RPi as GPIO
-
-
-
-
-
-
-
-
-
-# main loop
-while (True):
-    
-
-
-
 
 
 # Class for Ammo counting and managing
@@ -130,6 +112,13 @@ class Turret ():
 			GPIO.output(RELAY_PIN, GPIO.HIGH)
 		else: 
 			GPIO.output(RELAY_PIN, GPIO.LOW)
+
+turret = Turret();
+
+# main loop
+while (True):
+    
+
 
 
 
