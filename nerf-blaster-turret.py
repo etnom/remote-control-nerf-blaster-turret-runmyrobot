@@ -4,7 +4,7 @@
 from Adafruit_MotorHAT import Adafruit_MotorHAT, Adafruit_StepperMotor
 import time
 import atexit
-import RPi as GPIO
+import RPi.GPIO as GPIO
 
 
 print "running!"
