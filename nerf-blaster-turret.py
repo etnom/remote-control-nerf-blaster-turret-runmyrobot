@@ -6,6 +6,7 @@ import time
 import atexit
 import RPi as GPIO
 
+
 print "running!"
 
 
@@ -13,7 +14,7 @@ print "running!"
 # Traditionally, my ammo counters include 3 components: An ammo counting detection mechanism (IR Gate, or a switch which is oriented to be pressed alongside a trigger), a button to toggle between the various magazine sizes, and a switch to detect when magazines are changed. 
 # In this build, I omitted the button to toggle between the various magazine sizes. I would assume there is only going to be one magazine size being used, which can be changed in the code. The magazine changing detection switch is still in the blaster.
 class AmmoCounter ():
-	def __init__ (self):
+        def __init__ (self):
 		# IO pins
 		self.MAGAZINE_INSERTION_DETECTION_PIN = 23
 		self.TRIGGER_SWTICh_PIN = 24
@@ -27,22 +28,22 @@ class AmmoCounter ():
 	def initInputButtons ():
 		# Init magazine insertion detection switch input pin
 		GPIO.setmode(GPIO.BCM)
-    	GPIO.setup(self.MAGAZINE_INSERTION_DETECTION_PIN, GPIO.IN, pull_up_down = GPIO.PUD_UP)
-    	GPIO.add_event_detect(self.MAGAZINE_INSERTION_DETECTION_PIN, GPIO.BOTH)
-    	GPIO.add_event_callback(self.MAGAZINE_INSERTION_DETECTION_PIN, self.reload)
+                GPIO.setup(self.MAGAZINE_INSERTION_DETECTION_PIN, GPIO.IN, pull_up_down = GPIO.PUD_UP)
+                GPIO.add_event_detect(self.MAGAZINE_INSERTION_DETECTION_PIN, GPIO.BOTH)
+                GPIO.add_event_callback(self.MAGAZINE_INSERTION_DETECTION_PIN, self.reload)
 
-    	# Init trigger switch input pin
+                # Init trigger switch input pin
 		GPIO.setmode(GPIO.BCM)
-    	GPIO.setup(self.TRIGGER_SWTICh_PIN, GPIO.IN, pull_up_down = GPIO.PUD_UP)
-    	GPIO.add_event_detect(self.TRIGGER_SWTICh_PIN, GPIO.BOTH)
-    	GPIO.add_event_callback(self.TRIGGER_SWTICh_PIN, self.countAmmo)
+                GPIO.setup(self.TRIGGER_SWTICh_PIN, GPIO.IN, pull_up_down = GPIO.PUD_UP)
+                GPIO.add_event_detect(self.TRIGGER_SWTICh_PIN, GPIO.BOTH)
+                GPIO.add_event_callback(self.TRIGGER_SWTICh_PIN, self.countAmmo)
 
-    def countAmmo:
-    	if (self.currentAmmo > 0):
-    		self.currentAmmo--
+        def countAmmo ():
+                if (self.currentAmmo > 0):
+                        self.currentAmmo = self.currentAmmo - 1
 
-    def reload:
-    	self.currentAmmo = self.maxAmmo;
+        def reload ():
+                self.currentAmmo = self.maxAmmo;
 
 
 # Class for managing turret
@@ -57,7 +58,7 @@ class Turret ():
 
 
 	# Init stepper motors
-	 def initSteppers ():
+        def initSteppers ():
 	 	# new Motor HAT
 		self.mh = Adafruit_MotorHAT(addr = 0x60)
 		atexit.register(self.disableMotors)
