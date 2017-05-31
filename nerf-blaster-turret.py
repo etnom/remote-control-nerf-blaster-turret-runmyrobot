@@ -10,6 +10,10 @@ import RPi as GPIO
 print "running!"
 
 
+# Wrapper for step(), so stepping will be easier to manage when multitasking motors
+def stepperWrapper (self, stepper, numOfSteps, direction):
+    stepper.step(numOfSteps, direction, Adafruit_MotorHAT.INTERLEAVE)
+
 # Class for Ammo counting and managing
 # Traditionally, my ammo counters include 3 components: An ammo counting detection mechanism (IR Gate, or a switch which is oriented to be pressed alongside a trigger), a button to toggle between the various magazine sizes, and a switch to detect when magazines are changed. 
 # In this build, I omitted the button to toggle between the various magazine sizes. I would assume there is only going to be one magazine size being used, which can be changed in the code. The magazine changing detection switch is still in the blaster.
@@ -81,38 +85,42 @@ class Turret ():
 
 	    return self
 
-	# Wrapper for step(), so stepping will be easier to manage when multitasking motors
-	def stepperWrapper (self, stepper, numOfSteps, direction):
-	    stepper.step(numOfSteps, direction, Adafruit_MotorHAT.INTERLEAVE)
-
 	# Functions for aiming/angling/rotating blaster
 	# Using threading to be able to control more than 1 motor at the same time
 	def rotateUp (self):
 		print "rotating up!"
 
-		rotateUp_Thread = threading.Thread(target = self.stepperWrapper, args = (self.verticalStepper, self.STEPS, Adafruit_MotorHAT.FORWARD))
-		rotateUp_Thread.start()
+		# rotateUp_Thread = threading.Thread(target = self.stepperWrapper, args = (self.verticalStepper, self.STEPS, Adafruit_MotorHAT.FORWARD))
+		# rotateUp_Thread.start()
+		
+		self.verticalStepper.step(self.STEPS, Adafruit_MotorHAT.FORWARD, Adafruit_MotorHAT.INTERLEAVE)
 		return self
 
 	def rotateDown (self):
 		print "rotating down!"
 
-		rotateDown_Thread = threading.Thread(target = self.stepperWrapper, args = (self.verticalStepper, self.STEPS, Adafruit_MotorHAT.BACKWARD))
-		rotateDown_Thread.start()
+		# rotateDown_Thread = threading.Thread(target = self.stepperWrapper, args = (self.verticalStepper, self.STEPS, Adafruit_MotorHAT.BACKWARD))
+		# rotateDown_Thread.start
+		
+		self.verticalStepper.step(self.STEPS, Adafruit_MotorHAT.BACKWARD, Adafruit_MotorHAT.INTERLEAVE)
 		return self
 
 	def rotateRight (self):
 		print "rotating right!"
 
-		rotateRight_Thread = threading.Thread(target = self.stepperWrapper, args = (self.horizontalStepper, self.STEPS, Adafruit_MotorHAT.FORWARD))
-		rotateRight_Thread.start()
+		# rotateRight_Thread = threading.Thread(target = self.stepperWrapper, args = (self.horizontalStepper, self.STEPS, Adafruit_MotorHAT.FORWARD))
+		# rotateRight_Thread.start()
+		
+		self.horizontalStepper.step(self.STEPS, Adafruit_MotorHAT.FORWARD, Adafruit_MotorHAT.INTERLEAVE)
 		return self
 
 	def rotateLeft (self):
 		print "rotating left!"
 
-		rotateLeft_Thread = threading.Thread(target = self.stepperWrapper, args = (self.horizontalStepper, self.STEPS, Adafruit_MotorHAT.BACKWARD))
-		rotateLeft_Thread.start()
+		# rotateLeft_Thread = threading.Thread(target = self.stepperWrapper, args = (self.horizontalStepper, self.STEPS, Adafruit_MotorHAT.BACKWARD))
+		# rotateLeft_Thread.start()
+		
+		self.horizontalStepper.step(self.STEPS, Adafruit_MotorHAT.BACKWARD, Adafruit_MotorHAT.INTERLEAVE)
 		return self
 
 	# auto-disable motors on shutdown
