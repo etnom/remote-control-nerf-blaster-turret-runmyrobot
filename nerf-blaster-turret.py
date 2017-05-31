@@ -6,6 +6,8 @@ import time
 import atexit
 import RPi as GPIO
 
+print "running!"
+
 
 # Class for Ammo counting and managing
 # Traditionally, my ammo counters include 3 components: An ammo counting detection mechanism (IR Gate, or a switch which is oriented to be pressed alongside a trigger), a button to toggle between the various magazine sizes, and a switch to detect when magazines are changed. 
@@ -84,21 +86,29 @@ class Turret ():
 	# Functions for aiming/angling/rotating blaster
 	# Using threading to be able to control more than 1 motor at the same time
 	def rotateUp ():
+		print "rotating up!"
+
 	    rotateUp_Thread = threading.Thread(target = self.stepperWrapper, args = (self.verticalStepper, self.STEPS, Adafruit_MotorHAT.FORWARD))
 	    rotateUp_Thread.start()
 	    return self
 
 	def rotateDown ():
+		print "rotating down!"
+
 	    rotateDown_Thread = threading.Thread(target = self.stepperWrapper, args = (self.verticalStepper, self.STEPS, Adafruit_MotorHAT.BACKWARD))
 	    rotateDown_Thread.start()
 	    return self
 
 	def rotateRight ():
+		print "rotating right!"
+
 	    rotateRight_Thread = threading.Thread(target = self.stepperWrapper, args = (self.horizontalStepper, self.STEPS, Adafruit_MotorHAT.FORWARD))
 	    rotateRight_Thread.start()
 	    return self
 
 	def rotateLeft ():
+		print "rotating left!"
+
 	    rotateLeft_Thread = threading.Thread(target = self.stepperWrapper, args = (self.horizontalStepper, self.STEPS, Adafruit_MotorHAT.BACKWARD))
 	    rotateLeft_Thread.start()
 	    return self
@@ -111,6 +121,8 @@ class Turret ():
 	    self.mh.getMotor(4).run(Adafruit_MotorHAT.RELEASE)
 
 	def shoot():
+		print "shooting!"
+
 		self.lastAmmo = ammoCounter.currentAmmo
 		if (ammoCounter.currentAmmo >= self.lastAmmo):
 			GPIO.output(RELAY_PIN, GPIO.HIGH)
