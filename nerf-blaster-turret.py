@@ -122,7 +122,7 @@ turret = Turret();
 
 # main loop
 while (True):
-    
+    turret.rotateUp().rotateUp().rotateUp().rotateDown().rotateDown().rotateDown()
 
 
 
