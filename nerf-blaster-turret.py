@@ -86,18 +86,22 @@ class Turret ():
 	def rotateUp ():
 	    rotateUp_Thread = threading.Thread(target = self.stepperWrapper, args = (self.verticalStepper, self.STEPS, Adafruit_MotorHAT.FORWARD))
 	    rotateUp_Thread.start()
+	    return self
 
 	def rotateDown ():
 	    rotateDown_Thread = threading.Thread(target = self.stepperWrapper, args = (self.verticalStepper, self.STEPS, Adafruit_MotorHAT.BACKWARD))
 	    rotateDown_Thread.start()
+	    return self
 
 	def rotateRight ():
 	    rotateRight_Thread = threading.Thread(target = self.stepperWrapper, args = (self.horizontalStepper, self.STEPS, Adafruit_MotorHAT.FORWARD))
 	    rotateRight_Thread.start()
+	    return self
 
 	def rotateLeft ():
 	    rotateLeft_Thread = threading.Thread(target = self.stepperWrapper, args = (self.horizontalStepper, self.STEPS, Adafruit_MotorHAT.BACKWARD))
 	    rotateLeft_Thread.start()
+	    return self
 
 	# auto-disable motors on shutdown
 	def disableMotors():
@@ -112,6 +116,7 @@ class Turret ():
 			GPIO.output(RELAY_PIN, GPIO.HIGH)
 		else: 
 			GPIO.output(RELAY_PIN, GPIO.LOW)
+		return self
 
 turret = Turret();
 
