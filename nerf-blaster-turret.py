@@ -26,7 +26,7 @@ class AmmoCounter ():
 		self.initInputButtons()
 
 
-	def initInputButtons ():
+	def initInputButtons (self):
 		# Init magazine insertion detection switch input pin
 		GPIO.setmode(GPIO.BCM)
 		GPIO.setup(self.MAGAZINE_INSERTION_DETECTION_PIN, GPIO.IN, pull_up_down = GPIO.PUD_UP)
@@ -39,11 +39,11 @@ class AmmoCounter ():
 		GPIO.add_event_detect(self.TRIGGER_SWTICh_PIN, GPIO.BOTH)
 		GPIO.add_event_callback(self.TRIGGER_SWTICh_PIN, self.countAmmo)
 
-	def countAmmo ():
+	def countAmmo (self):
 		if (self.currentAmmo > 0):
 			self.currentAmmo = self.currentAmmo - 1
 
-	def reload ():
+	def reload (self):
 		self.currentAmmo = self.maxAmmo;
 
 
@@ -76,8 +76,8 @@ class Turret ():
 	# Init GPIO stuff for blaster
 	def initBlaster (self):
 	    GPIO.setmode(GPIO.BCM)
-	    GPIO.setup(FIRE_PIN, GPIO.OUT)
-	    GPIO.output(FIRE_PIN, GPIO,LOW)
+	    GPIO.setup(self.FIRE_PIN, GPIO.OUT)
+	    GPIO.output(self.FIRE_PIN, GPIO.LOW)
 
 	    return self
 
@@ -101,14 +101,14 @@ class Turret ():
 		rotateDown_Thread.start()
 		return self
 
-	def rotateRight ():
+	def rotateRight (self):
 		print "rotating right!"
 
 		rotateRight_Thread = threading.Thread(target = self.stepperWrapper, args = (self.horizontalStepper, self.STEPS, Adafruit_MotorHAT.FORWARD))
 		rotateRight_Thread.start()
 		return self
 
-	def rotateLeft ():
+	def rotateLeft (self):
 		print "rotating left!"
 
 		rotateLeft_Thread = threading.Thread(target = self.stepperWrapper, args = (self.horizontalStepper, self.STEPS, Adafruit_MotorHAT.BACKWARD))
@@ -116,20 +116,20 @@ class Turret ():
 		return self
 
 	# auto-disable motors on shutdown
-	def disableMotors():
+	def disableMotors(self):
 		self.mh.getMotor(1).run(Adafruit_MotorHAT.RELEASE)
 		self.mh.getMotor(2).run(Adafruit_MotorHAT.RELEASE)
 		self.mh.getMotor(3).run(Adafruit_MotorHAT.RELEASE)
 		self.mh.getMotor(4).run(Adafruit_MotorHAT.RELEASE)
 
-	def shoot():
+	def shoot(self):
 		print "shooting!"
 
-		self.lastAmmo = ammoCounter.currentAmmo
-		if (ammoCounter.currentAmmo >= self.lastAmmo):
-			GPIO.output(RELAY_PIN, GPIO.HIGH)
+		self.lastAmmo = self.FIRE_PINammoCounter.currentAmmo
+		if (self.ammoCounter.currentAmmo >= self.lastAmmo):
+			GPIO.output(self.FIRE_PIN, GPIO.HIGH)
 		else: 
-			GPIO.output(RELAY_PIN, GPIO.LOW)
+			GPIO.output(self.FIRE_PIN, GPIO.LOW)
 		return self
 
 turret = Turret();
