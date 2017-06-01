@@ -48,7 +48,7 @@ class AmmoCounter ():
 		if (self.currentAmmo > 0):
 			self.currentAmmo = self.currentAmmo - 1
 
-	def reload (self):
+	def reloadAmmo (self):
 		self.currentAmmo = self.maxAmmo;
 
 
@@ -134,11 +134,11 @@ class Turret ():
 	def shoot(self):
 		print "shooting!"
 
-		self.lastAmmo = self.ammoCounter.currentAmmo
-		if (self.ammoCounter.currentAmmo >= self.lastAmmo):
-			GPIO.output(self.FIRE_PIN, GPIO.HIGH)
-		else: 
-			GPIO.output(self.FIRE_PIN, GPIO.LOW)
+		GPIO.output(self.FIRE_PIN, GPIO.HIGH)
+		time.sleep(.3)
+		self.ammoCounter.countAmmo();
+		GPIO.output(self.FIRE_PIN, GPIO.LOW)
+		
 		return self
 
 turret = Turret();
