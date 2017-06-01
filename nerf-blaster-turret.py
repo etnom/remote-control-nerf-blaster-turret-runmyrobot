@@ -160,6 +160,10 @@ while (True):
     # turret.rotateDown()
     # turret.rotateDown()
     # turret.rotateDown()
+    
+turret.shoot()    
+    
+GPIO.cleanup()
 
 
 
