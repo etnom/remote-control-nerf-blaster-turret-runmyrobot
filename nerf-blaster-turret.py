@@ -82,9 +82,10 @@ class Turret ():
 	# Init GPIO stuff for blaster
 	def initBlaster (self):
 		#pin for flywheels
+		#always have flywheels on. It will be noisy, but there will be no delay when firing since we dont need to keep toggling the flywheels
 		GPIO.setmode(GPIO.BCM)
 		GPIO.setup(self.FLYWHEEL_PIN, GPIO.OUT)
-		GPIO.output(self.FLYWHEEL_PIN, GPIO.LOW)
+		GPIO.output(self.FLYWHEEL_PIN, GPIO.HIGH)
 	    
 		#pin for firing
 		GPIO.setmode(GPIO.BCM)
