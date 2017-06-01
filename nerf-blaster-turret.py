@@ -36,7 +36,7 @@ class AmmoCounter ():
 		GPIO.setmode(GPIO.BCM)
 		GPIO.setup(self.MAGAZINE_INSERTION_DETECTION_PIN, GPIO.IN, pull_up_down = GPIO.PUD_UP)
 		GPIO.add_event_detect(self.MAGAZINE_INSERTION_DETECTION_PIN, GPIO.BOTH)
-		GPIO.add_event_callback(self.MAGAZINE_INSERTION_DETECTION_PIN, self.reload)
+		GPIO.add_event_callback(self.MAGAZINE_INSERTION_DETECTION_PIN, self.reloadAmmo)
 
         # Init trigger switch input pin
 		# GPIO.setmode(GPIO.BCM)
@@ -145,12 +145,13 @@ turret = Turret();
 
 # main loop
 while (True):
-    turret.rotateUp()
-    turret.rotateUp()
-    turret.rotateUp()
-    turret.rotateDown()
-    turret.rotateDown()
-    turret.rotateDown()
+	True
+    # turret.rotateUp()
+    # turret.rotateUp()
+    # turret.rotateUp()
+    # turret.rotateDown()
+    # turret.rotateDown()
+    # turret.rotateDown()
 
 
 
