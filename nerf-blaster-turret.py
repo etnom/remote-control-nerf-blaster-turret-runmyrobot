@@ -55,7 +55,8 @@ class AmmoCounter ():
 # Class for managing turret
 class Turret (): 
 	def __init__ (self):
-		self.FIRE_PIN = 22
+		self.FLYWHEEL_PIN = 23
+		self.FIRE_PIN = 24
 		self.STEPS = 5
 
 		self.ammoCounter = AmmoCounter()
@@ -80,11 +81,17 @@ class Turret ():
 
 	# Init GPIO stuff for blaster
 	def initBlaster (self):
-	    GPIO.setmode(GPIO.BCM)
-	    GPIO.setup(self.FIRE_PIN, GPIO.OUT)
-	    GPIO.output(self.FIRE_PIN, GPIO.LOW)
-
-	    return self
+		#pin for flywheels
+		GPIO.setmode(GPIO.BCM)
+		GPIO.setup(self.FLYWHEEL_PIN, GPIO.OUT)
+		GPIO.output(self.FLYWHEEL_PIN, GPIO.LOW)
+	    
+		#pin for firing
+		GPIO.setmode(GPIO.BCM)
+		GPIO.setup(self.FIRE_PIN, GPIO.OUT)
+		GPIO.output(self.FIRE_PIN, GPIO.LOW)
+	
+		return self
 
 	# Functions for aiming/angling/rotating blaster
 	# Using threading to be able to control more than 1 motor at the same time
