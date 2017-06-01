@@ -5,6 +5,7 @@ from Adafruit_MotorHAT import Adafruit_MotorHAT, Adafruit_StepperMotor
 import time
 import atexit
 import RPi.GPIO as GPIO
+import threading
 
 
 print "running!"
@@ -90,16 +91,16 @@ class Turret ():
 	def rotateUp (self):
 		print "rotating up!"
 
-		# rotateUp_Thread = threading.Thread(target = self.stepperWrapper, args = (self.verticalStepper, self.STEPS, Adafruit_MotorHAT.FORWARD))
+		# rotateUp_Thread = threading.Thread(target = stepperWrapper, args = (self.verticalStepper, self.STEPS, Adafruit_MotorHAT.FORWARD))
 		# rotateUp_Thread.start()
 		
-		self.verticalStepper.step(self.STEPS, Adafruit_MotorHAT.FORWARD, Adafruit_MotorHAT.INTERLEAVE)
+		# self.verticalStepper.step(self.STEPS, Adafruit_MotorHAT.FORWARD, Adafruit_MotorHAT.INTERLEAVE)
 		return self
 
 	def rotateDown (self):
 		print "rotating down!"
 
-		# rotateDown_Thread = threading.Thread(target = self.stepperWrapper, args = (self.verticalStepper, self.STEPS, Adafruit_MotorHAT.BACKWARD))
+		# rotateDown_Thread = threading.Thread(target = stepperWrapper, args = (self.verticalStepper, self.STEPS, Adafruit_MotorHAT.BACKWARD))
 		# rotateDown_Thread.start
 		
 		self.verticalStepper.step(self.STEPS, Adafruit_MotorHAT.BACKWARD, Adafruit_MotorHAT.INTERLEAVE)
@@ -108,7 +109,7 @@ class Turret ():
 	def rotateRight (self):
 		print "rotating right!"
 
-		# rotateRight_Thread = threading.Thread(target = self.stepperWrapper, args = (self.horizontalStepper, self.STEPS, Adafruit_MotorHAT.FORWARD))
+		# rotateRight_Thread = threading.Thread(target = stepperWrapper, args = (self.horizontalStepper, self.STEPS, Adafruit_MotorHAT.FORWARD))
 		# rotateRight_Thread.start()
 		
 		self.horizontalStepper.step(self.STEPS, Adafruit_MotorHAT.FORWARD, Adafruit_MotorHAT.INTERLEAVE)
@@ -117,7 +118,7 @@ class Turret ():
 	def rotateLeft (self):
 		print "rotating left!"
 
-		# rotateLeft_Thread = threading.Thread(target = self.stepperWrapper, args = (self.horizontalStepper, self.STEPS, Adafruit_MotorHAT.BACKWARD))
+		# rotateLeft_Thread = threading.Thread(target = stepperWrapper, args = (self.horizontalStepper, self.STEPS, Adafruit_MotorHAT.BACKWARD))
 		# rotateLeft_Thread.start()
 		
 		self.horizontalStepper.step(self.STEPS, Adafruit_MotorHAT.BACKWARD, Adafruit_MotorHAT.INTERLEAVE)
