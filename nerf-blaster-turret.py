@@ -50,6 +50,7 @@ class AmmoCounter ():
 
 	def reloadAmmo (self):
 		self.currentAmmo = self.maxAmmo;
+		print "reloading"
 
 
 # Class for managing turret
@@ -134,7 +135,7 @@ class Turret ():
 
 	#auto disable all motors and relays on shutdown
 	def disableTurret (self):
-		self.disableStepperMotors()
+		self.disableStepperMotors().disableBlaster()
 
 	# auto-disable motors on shutdown
 	def disableStepperMotors(self):
@@ -142,6 +143,17 @@ class Turret ():
 		self.mh.getMotor(2).run(Adafruit_MotorHAT.RELEASE)
 		self.mh.getMotor(3).run(Adafruit_MotorHAT.RELEASE)
 		self.mh.getMotor(4).run(Adafruit_MotorHAT.RELEASE)
+		
+		return self
+		
+	#disable blaster. This includes shutting off relay and clearing GPIO
+	def disableBlaster(self):
+		GPIO.output(self.FIRE_PIN, GPIO.LOW)
+		GPIO.output(self.FLYWHEEL_PIN, GPIO.LOW)
+		
+		GPIO.cleanup()
+		
+		return self
 
 	def shoot(self):
 		print "shooting!"
@@ -170,9 +182,7 @@ turret.shoot()
     # turret.rotateDown()
     # turret.rotateDown()
     
-    
-GPIO.cleanup()
-
+   
 
 
 
