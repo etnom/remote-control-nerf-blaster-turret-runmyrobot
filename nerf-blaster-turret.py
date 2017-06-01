@@ -21,8 +21,8 @@ def stepperWrapper (self, stepper, numOfSteps, direction):
 class AmmoCounter ():
 	def __init__ (self):
 		# IO pins
-		self.MAGAZINE_INSERTION_DETECTION_PIN = 23
-		self.TRIGGER_SWTICh_PIN = 24
+		self.MAGAZINE_INSERTION_DETECTION_PIN = 22
+		# self.TRIGGER_SWTICh_PIN = 24
 		
 		# Ammo
 		self.currentAmmo = 25
@@ -39,10 +39,10 @@ class AmmoCounter ():
 		GPIO.add_event_callback(self.MAGAZINE_INSERTION_DETECTION_PIN, self.reload)
 
         # Init trigger switch input pin
-		GPIO.setmode(GPIO.BCM)
-		GPIO.setup(self.TRIGGER_SWTICh_PIN, GPIO.IN, pull_up_down = GPIO.PUD_UP)
-		GPIO.add_event_detect(self.TRIGGER_SWTICh_PIN, GPIO.BOTH)
-		GPIO.add_event_callback(self.TRIGGER_SWTICh_PIN, self.countAmmo)
+		# GPIO.setmode(GPIO.BCM)
+		# GPIO.setup(self.TRIGGER_SWTICh_PIN, GPIO.IN, pull_up_down = GPIO.PUD_UP)
+		# GPIO.add_event_detect(self.TRIGGER_SWTICh_PIN, GPIO.BOTH)
+		# GPIO.add_event_callback(self.TRIGGER_SWTICh_PIN, self.countAmmo)
 
 	def countAmmo (self):
 		if (self.currentAmmo > 0):
@@ -134,7 +134,7 @@ class Turret ():
 	def shoot(self):
 		print "shooting!"
 
-		self.lastAmmo = self.FIRE_PINammoCounter.currentAmmo
+		self.lastAmmo = self.ammoCounter.currentAmmo
 		if (self.ammoCounter.currentAmmo >= self.lastAmmo):
 			GPIO.output(self.FIRE_PIN, GPIO.HIGH)
 		else: 
