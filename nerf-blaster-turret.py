@@ -68,7 +68,7 @@ class Turret ():
 	def initSteppers (self):
 	 	# new Motor HAT
 		self.mh = Adafruit_MotorHAT(addr = 0x60)
-		atexit.register(self.disableMotors)
+		atexit.register(self.disableTurret)
 
 		#create and set stepper motor objects
 		self.verticalStepper = self.mh.getStepper(200, 2)
@@ -132,8 +132,12 @@ class Turret ():
 		self.horizontalStepper.step(self.STEPS, Adafruit_MotorHAT.BACKWARD, Adafruit_MotorHAT.INTERLEAVE)
 		return self
 
+	#auto disable all motors and relays on shutdown
+	def disableTurret (self):
+		self.disableStepperMotors()
+
 	# auto-disable motors on shutdown
-	def disableMotors(self):
+	def disableStepperMotors(self):
 		self.mh.getMotor(1).run(Adafruit_MotorHAT.RELEASE)
 		self.mh.getMotor(2).run(Adafruit_MotorHAT.RELEASE)
 		self.mh.getMotor(3).run(Adafruit_MotorHAT.RELEASE)
@@ -151,9 +155,14 @@ class Turret ():
 
 turret = Turret();
 
+turret.shoot()    
+turret.shoot()    
+turret.shoot()    
+
+
 # main loop
-while (True):
-	True
+# while (True):
+	# True
     # turret.rotateUp()
     # turret.rotateUp()
     # turret.rotateUp()
@@ -161,7 +170,6 @@ while (True):
     # turret.rotateDown()
     # turret.rotateDown()
     
-turret.shoot()    
     
 GPIO.cleanup()
 
