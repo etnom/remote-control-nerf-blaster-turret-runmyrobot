@@ -25,14 +25,14 @@ class AmmoCounter ():
 		self.currentAmmo = 25
 		self.maxAmmo = 25
 		
-		self.initInputButtons()
+		# self.initInputButtons()
 
 
 	def initInputButtons (self):
 		# Init magazine insertion detection switch input pin
-		GPIO.setmode(GPIO.BCM)
-		GPIO.setup(self.MAGAZINE_INSERTION_DETECTION_PIN, GPIO.IN, pull_up_down = GPIO.PUD_UP)
-		GPIO.add_event_detect(self.MAGAZINE_INSERTION_DETECTION_PIN, GPIO.BOTH)
+		# GPIO.setmode(GPIO.BCM)
+		# GPIO.setup(self.MAGAZINE_INSERTION_DETECTION_PIN, GPIO.IN, pull_up_down = GPIO.PUD_UP)
+		# GPIO.add_event_detect(self.MAGAZINE_INSERTION_DETECTION_PIN, GPIO.BOTH)
 		#GPIO.add_event_callback(self.MAGAZINE_INSERTION_DETECTION_PIN, self.reloadAmmo)
 
         # Init trigger switch input pin
