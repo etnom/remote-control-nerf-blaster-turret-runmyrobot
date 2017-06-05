@@ -15,39 +15,39 @@ def stepperWrapper (self, stepper, numOfSteps, direction):
 # Class for Ammo counting and managing
 # Traditionally, my ammo counters include 3 components: An ammo counting detection mechanism (IR Gate, or a switch which is oriented to be pressed alongside a trigger), a button to toggle between the various magazine sizes, and a switch to detect when magazines are changed. 
 # In this build, I omitted the button to toggle between the various magazine sizes. I would assume there is only going to be one magazine size being used, which can be changed in the code. The magazine changing detection switch is still in the blaster.
-class AmmoCounter ():
-	def __init__ (self):
-		# IO pins
-		self.MAGAZINE_INSERTION_DETECTION_PIN = 22
-		# self.TRIGGER_SWTICh_PIN = 24
+# class AmmoCounter ():
+# 	def __init__ (self):
+# 		# IO pins
+# 		self.MAGAZINE_INSERTION_DETECTION_PIN = 22
+# 		# self.TRIGGER_SWTICh_PIN = 24
 		
-		# Ammo
-		self.currentAmmo = 25
-		self.maxAmmo = 25
+# 		# Ammo
+# 		self.currentAmmo = 25
+# 		self.maxAmmo = 25
 		
-		# self.initInputButtons()
+# 		# self.initInputButtons()
 
 
-	def initInputButtons (self):
-		# Init magazine insertion detection switch input pin
-		# GPIO.setmode(GPIO.BCM)
-		# GPIO.setup(self.MAGAZINE_INSERTION_DETECTION_PIN, GPIO.IN, pull_up_down = GPIO.PUD_UP)
-		# GPIO.add_event_detect(self.MAGAZINE_INSERTION_DETECTION_PIN, GPIO.BOTH)
-		#GPIO.add_event_callback(self.MAGAZINE_INSERTION_DETECTION_PIN, self.reloadAmmo)
+# 	def initInputButtons (self):
+# 		# Init magazine insertion detection switch input pin
+# 		# GPIO.setmode(GPIO.BCM)
+# 		# GPIO.setup(self.MAGAZINE_INSERTION_DETECTION_PIN, GPIO.IN, pull_up_down = GPIO.PUD_UP)
+# 		# GPIO.add_event_detect(self.MAGAZINE_INSERTION_DETECTION_PIN, GPIO.BOTH)
+# 		#GPIO.add_event_callback(self.MAGAZINE_INSERTION_DETECTION_PIN, self.reloadAmmo)
 
-        # Init trigger switch input pin
-		# GPIO.setmode(GPIO.BCM)
-		# GPIO.setup(self.TRIGGER_SWTICh_PIN, GPIO.IN, pull_up_down = GPIO.PUD_UP)
-		# GPIO.add_event_detect(self.TRIGGER_SWTICh_PIN, GPIO.BOTH)
-		# GPIO.add_event_callback(self.TRIGGER_SWTICh_PIN, self.countAmmo)
+#         # Init trigger switch input pin
+# 		# GPIO.setmode(GPIO.BCM)
+# 		# GPIO.setup(self.TRIGGER_SWTICh_PIN, GPIO.IN, pull_up_down = GPIO.PUD_UP)
+# 		# GPIO.add_event_detect(self.TRIGGER_SWTICh_PIN, GPIO.BOTH)
+# 		# GPIO.add_event_callback(self.TRIGGER_SWTICh_PIN, self.countAmmo)
 
-	def countAmmo (self):
-		if (self.currentAmmo > 0):
-			self.currentAmmo = self.currentAmmo - 1
+# 	def countAmmo (self):
+# 		if (self.currentAmmo > 0):
+# 			self.currentAmmo = self.currentAmmo - 1
 
-	def reloadAmmo (self):
-		self.currentAmmo = self.maxAmmo;
-		print "reloading"
+# 	def reloadAmmo (self):
+# 		self.currentAmmo = self.maxAmmo;
+# 		print "reloading"
 
 
 # Class for managing turret
@@ -57,7 +57,7 @@ class Turret ():
 		self.FIRE_PIN = 24
 		self.STEPS = 5
 
-		self.ammoCounter = AmmoCounter()
+		# self.ammoCounter = AmmoCounter()
 
 		self.initSteppers().initBlaster()
 
@@ -157,7 +157,7 @@ class Turret ():
 
 		GPIO.output(self.FIRE_PIN, GPIO.HIGH)
 		time.sleep(.3)
-		self.ammoCounter.countAmmo();
+		# self.ammoCounter.countAmmo();
 		GPIO.output(self.FIRE_PIN, GPIO.LOW)
 		
 		return self
