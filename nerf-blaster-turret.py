@@ -8,9 +8,6 @@ import RPi.GPIO as GPIO
 import threading
 
 
-print "running!"
-
-
 # Wrapper for step(), so stepping will be easier to manage when multitasking motors
 def stepperWrapper (self, stepper, numOfSteps, direction):
     stepper.step(numOfSteps, direction, Adafruit_MotorHAT.INTERLEAVE)
@@ -165,22 +162,7 @@ class Turret ():
 		
 		return self
 
-turret = Turret();
 
-turret.shoot()    
-turret.shoot()    
-turret.shoot()    
-
-
-# main loop
-# while (True):
-	# True
-    # turret.rotateUp()
-    # turret.rotateUp()
-    # turret.rotateUp()
-    # turret.rotateDown()
-    # turret.rotateDown()
-    # turret.rotateDown()
     
    
 
