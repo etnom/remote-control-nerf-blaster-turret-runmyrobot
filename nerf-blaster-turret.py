@@ -53,8 +53,8 @@ def stepperWrapper (self, stepper, numOfSteps, direction):
 # Class for managing turret
 class Turret (): 
 	def __init__ (self):
-		self.FLYWHEEL_PIN = 23
-		self.FIRE_PIN = 24
+		self.FLYWHEEL_PIN = 24
+		self.FIRE_PIN = 23
 		self.STEPS = 5
 
 		# self.ammoCounter = AmmoCounter()
@@ -69,7 +69,7 @@ class Turret ():
 		atexit.register(self.disableTurret)
 
 		#create and set stepper motor objects
-		self.verticalStepper = self.mh.getStepper(200, 2)
+		self.verticalStepper = self.mh.getStepper(200, 1)
 		self.verticalStepper.setSpeed(5)
 
 		self.horizontalStepper = self.mh.getStepper(200, 2)
@@ -83,27 +83,27 @@ class Turret ():
 		#always have flywheels on. It will be noisy, but there will be no delay when firing since we dont need to keep toggling the flywheels
 		GPIO.setmode(GPIO.BCM)
 		GPIO.setup(self.FLYWHEEL_PIN, GPIO.OUT)
-		GPIO.output(self.FLYWHEEL_PIN, GPIO.HIGH)
+		GPIO.output(self.FLYWHEEL_PIN, GPIO.LOW)
 	    
 		#pin for firing
 		GPIO.setmode(GPIO.BCM)
 		GPIO.setup(self.FIRE_PIN, GPIO.OUT)
-		GPIO.output(self.FIRE_PIN, GPIO.LOW)
+		GPIO.output(self.FIRE_PIN, GPIO.HIGH)
 	
 		return self
 
 	# Functions for aiming/angling/rotating blaster
 	# Using threading to be able to control more than 1 motor at the same time
-	def rotateUp (self):
+	def rotateDown (self):
 		print "rotating up!"
 
 		# rotateUp_Thread = threading.Thread(target = stepperWrapper, args = (self.verticalStepper, self.STEPS, Adafruit_MotorHAT.FORWARD))
 		# rotateUp_Thread.start()
 		
-		# self.verticalStepper.step(self.STEPS, Adafruit_MotorHAT.FORWARD, Adafruit_MotorHAT.INTERLEAVE)
+		self.verticalStepper.step(self.STEPS, Adafruit_MotorHAT.FORWARD, Adafruit_MotorHAT.INTERLEAVE)
 		return self
 
-	def rotateDown (self):
+	def rotateUp (self):
 		print "rotating down!"
 
 		# rotateDown_Thread = threading.Thread(target = stepperWrapper, args = (self.verticalStepper, self.STEPS, Adafruit_MotorHAT.BACKWARD))
@@ -132,7 +132,7 @@ class Turret ():
 
 	#auto disable all motors and relays on shutdown
 	def disableTurret (self):
-		self.disableStepperMotors().disableBlaster()
+		self.disableStepperMotors()
 
 	# auto-disable motors on shutdown
 	def disableStepperMotors(self):
@@ -153,19 +153,10 @@ class Turret ():
 		return self
 
 	def shoot(self):
-		print "shooting!"
+		print "shooting! from nerfBlasterTurret"
 
-		GPIO.output(self.FIRE_PIN, GPIO.HIGH)
-		time.sleep(.3)
-		# self.ammoCounter.countAmmo();
 		GPIO.output(self.FIRE_PIN, GPIO.LOW)
+		time.sleep(.3)
+		GPIO.output(self.FIRE_PIN, GPIO.HIGH)
 		
 		return self
-
-
-    
-   
-
-
-
-
