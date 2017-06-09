@@ -1,7 +1,7 @@
 # Made for RunMyRobot
 # By Monty C
 
-from Adafruit_MotorHAT import Adafruit_MotorHAT, Adafruit_StepperMotor
+from Adafruit_MotorHAT import Adafruit_MotorHAT, Adafruit_StepperMotor, Adafruit_DCMotor
 import time
 import atexit
 import RPi.GPIO as GPIO
