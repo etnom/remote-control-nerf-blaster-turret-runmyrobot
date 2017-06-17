@@ -72,8 +72,8 @@ class Turret ():
 		self.verticalStepper = self.mh.getStepper(200, 1)
 		self.verticalStepper.setSpeed(5)
 
-		self.horizontalMotor = self.mh.getMotor(3)
-		self.horizontalMotor.setSpeed(150)
+		self.horizontalStepper = self.mh.getStepper(200, 2)
+		self.horizontalStepper.setSpeed(5)
 
 		return self
 
@@ -118,7 +118,7 @@ class Turret ():
 		# rotateRight_Thread = threading.Thread(target = stepperWrapper, args = (self.horizontalStepper, self.STEPS, Adafruit_MotorHAT.FORWARD))
 		# rotateRight_Thread.start()
 		
-		self.horizontalMotor.run(Adafruit_MotorHAT.BACKWARD)
+		self.horizontalMotor.run(self.STEPS, Adafruit_MotorHAT.BACKWARD, Adafruit_MotorHAT.INTERLEAVE)
 		return self
 
 	def rotateLeft (self):
@@ -127,7 +127,7 @@ class Turret ():
 		# rotateLeft_Thread = threading.Thread(target = stepperWrapper, args = (self.horizontalStepper, self.STEPS, Adafruit_MotorHAT.BACKWARD))
 		# rotateLeft_Thread.start()
 		
-		self.horizontalMotor.run(Adafruit_MotorHAT.FORWARD)
+		self.horizontalMotor.run(self.STEPS, Adafruit_MotorHAT.FORWARD, Adafruit_MotorHAT.INTERLEAVE)
 		return self
 
 	#auto disable all motors and relays on shutdown
